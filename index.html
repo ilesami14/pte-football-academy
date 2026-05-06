@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PTE Football Academy Nigeria</title>
+  <meta name="description" content="PTE Football Academy — Performance Through Engagement. Free grassroots youth football academy in Ibadan, Nigeria. Ages U6–U16."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --white: #f5f5f0;
+      --sky: #4dbfef;
+      --sky-dark: #1a8fbf;
+      --orange: #f07020;
+      --green: #2d8a3e;
+      --grey: #1a1a1a;
+      --grey-mid: #2e2e2e;
+      --grey-light: #888;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+      --font-condensed: 'Barlow Condensed', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.4;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(77,191,239,0.12);
+      transition: all 0.3s ease;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .nav-logo-badge {
+      width: 42px;
+      height: 42px;
+      background: var(--sky);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--black);
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+
+    .nav-logo-text {
+      font-family: var(--font-condensed);
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--white);
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .nav-logo-text span {
+      color: var(--sky);
+      display: block;
+      font-weight: 300;
+      font-size: 0.7rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--grey-light);
+      text-decoration: none;
+      font-family: var(--font-condensed);
+      font-size: 0.9rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--sky); }
+
+    .nav-cta {
+      background: var(--sky) !important;
+      color: var(--black) !important;
+      padding: 0.45rem 1.2rem;
+      border-radius: 2px;
+      font-weight: 700 !important;
+      transition: background 0.2s !important;
+    }
+
+    .nav-cta:hover { background: var(--white) !important; color: var(--black) !important; }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 2.5rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.85) 70%, var(--black) 100%),
+        linear-gradient(135deg, rgba(77,191,239,0.08) 0%, transparent 50%);
+      z-index: 1;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(77,191,239,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(77,191,239,0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      z-index: 0;
+    }
+
+    .hero-accent {
+      position: absolute;
+      top: 15%;
+      right: -80px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(77,191,239,0.15) 0%, transparent 70%);
+      z-index: 0;
+      animation: pulse-glow 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse-glow {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.7; }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sky);
+      border: 1px solid var(--sky);
+      padding: 0.35rem 0.9rem;
+      margin-bottom: 1.5rem;
+      animation: fade-up 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(4rem, 12vw, 10rem);
+      line-height: 0.9;
+      color: var(--white);
+      margin-bottom: 0.5rem;
+      animation: fade-up 0.6s 0.1s ease both;
+    }
+
+    .hero-title .accent { color: var(--sky); }
+    .hero-title .outline {
+      -webkit-text-stroke: 2px var(--white);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-family: var(--font-condensed);
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      color: var(--grey-light);
+      letter-spacing: 0.05em;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      animation: fade-up 0.6s 0.2s ease both;
+    }
+
+    .hero-sub strong { color: var(--white); font-weight: 600; }
+
+    .hero-stats {
+      display: flex;
+      gap: 3rem;
+      margin-bottom: 3rem;
+      animation: fade-up 0.6s 0.3s ease both;
+    }
+
+    .stat-item { display: flex; flex-direction: column; }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 2.8rem;
+      color: var(--sky);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--grey-light);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      animation: fade-up 0.6s 0.4s ease both;
+    }
+
+    .btn-primary {
+      background: var(--sky);
+      color: var(--black);
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-condensed);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.2s;
+      display: inline-block;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--white);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-condensed);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      border: 1px solid rgba(255,255,255,0.3);
+      transition: all 0.2s;
+      display: inline-block;
+    }
+
+    .btn-outline:hover {
+      border-color: var(--sky);
+      color: var(--sky);
+      transform: translateY(-2px);
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 2.5rem;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: fade-up 0.6s 0.6s ease both;
+    }
+
+    .hero-scroll span {
+      font-family: var(--font-condensed);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      writing-mode: vertical-rl;
+    }
+
+    .scroll-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, var(--sky), transparent);
+      animation: scroll-drop 1.5s ease-in-out infinite;
+    }
+
+    @keyframes scroll-drop {
+      0% { transform: scaleY(0); transform-origin: top; }
+      50% { transform: scaleY(1); transform-origin: top; }
+      51% { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS SHARED ── */
+    section { padding: 6rem 2.5rem; }
+
+    .section-label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 2px;
+      background: var(--sky);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      line-height: 0.95;
+      margin-bottom: 1.5rem;
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--grey);
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: 'PTE';
+      position: absolute;
+      right: -0.1em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: var(--font-display);
+      font-size: 25vw;
+      color: rgba(77,191,239,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #ccc;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-text p strong { color: var(--white); }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .pillar {
+      background: var(--grey-mid);
+      border: 1px solid rgba(77,191,239,0.1);
+      padding: 1.25rem;
+      border-radius: 4px;
+      transition: border-color 0.2s;
+    }
+
+    .pillar:hover { border-color: var(--sky); }
+
+    .pillar-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .pillar h4 {
+      font-family: var(--font-condensed);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sky);
+      margin-bottom: 0.35rem;
+    }
+
+    .pillar p {
+      font-size: 0.85rem;
+      color: var(--grey-light);
+      line-height: 1.5;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      filter: grayscale(20%);
+    }
+
+    .about-img-overlay {
+      position: absolute;
+      bottom: -1.5rem;
+      left: -1.5rem;
+      width: 55%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 4px solid var(--grey);
+      filter: grayscale(20%);
+    }
+
+    .about-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: -1rem;
+      background: var(--sky);
+      color: var(--black);
+      padding: 1rem;
+      border-radius: 4px;
+      text-align: center;
+      min-width: 90px;
+    }
+
+    .about-badge .badge-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1;
+      display: block;
+    }
+
+    .about-badge .badge-text {
+      font-family: var(--font-condensed);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* ── PROGRAMS ── */
+    #programs { background: var(--black); }
+
+    .programs-header {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+    }
+
+    .programs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      max-width: 1200px;
+      margin: 0 auto;
+      border: 1px solid rgba(77,191,239,0.1);
+    }
+
+    .program-card {
+      padding: 2rem 1.5rem;
+      background: var(--grey);
+      border-right: 1px solid rgba(77,191,239,0.08);
+      transition: background 0.2s;
+      cursor: default;
+    }
+
+    .program-card:hover { background: var(--grey-mid); }
+
+    .program-age {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--sky);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+
+    .program-name {
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      margin-bottom: 1rem;
+    }
+
+    .program-desc {
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: #aaa;
+    }
+
+    .program-card .tag {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: var(--font-condensed);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--sky);
+      border: 1px solid rgba(77,191,239,0.3);
+      padding: 0.2rem 0.5rem;
+      border-radius: 2px;
+    }
+
+    /* ── GALLERY ── */
+    #gallery {
+      background: var(--grey);
+      padding-bottom: 4rem;
+    }
+
+    .gallery-header {
+      max-width: 1200px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto;
+      gap: 8px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 3px;
+      position: relative;
+    }
+
+    .gallery-item:nth-child(1) { grid-column: span 2; grid-row: span 2; }
+    .gallery-item:nth-child(5) { grid-column: span 2; }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      filter: grayscale(15%);
+      min-height: 200px;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.05);
+      filter: grayscale(0%);
+    }
+
+    .gallery-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.4) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── PHILOSOPHY ── */
+    #philosophy {
+      background: var(--sky);
+      color: var(--black);
+      padding: 5rem 2.5rem;
+      text-align: center;
+    }
+
+    #philosophy .section-label { color: var(--black); justify-content: center; }
+    #philosophy .section-label::before { background: var(--black); }
+
+    #philosophy .section-title { color: var(--black); }
+
+    .philosophy-quote {
+      font-family: var(--font-condensed);
+      font-size: clamp(1.3rem, 3vw, 2rem);
+      font-weight: 300;
+      font-style: italic;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      line-height: 1.5;
+      color: rgba(10,10,10,0.8);
+    }
+
+    .philosophy-tagline {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      color: var(--black);
+    }
+
+    /* ── SOCIAL ── */
+    #social { background: var(--black); }
+
+    .social-header {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .social-links {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .social-card {
+      background: var(--grey);
+      border: 1px solid rgba(255,255,255,0.05);
+      border-radius: 4px;
+      padding: 1.75rem;
+      text-decoration: none;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      transition: all 0.2s;
+    }
+
+    .social-card:hover {
+      border-color: var(--sky);
+      transform: translateY(-3px);
+    }
+
+    .social-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .social-icon.ig { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+    .social-icon.tt { background: #010101; border: 1px solid #333; }
+    .social-icon.yt { background: #ff0000; }
+    .social-icon.tw { background: #000; border: 1px solid #333; }
+
+    .social-info h4 {
+      font-family: var(--font-condensed);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .social-info p {
+      font-size: 0.8rem;
+      color: var(--grey-light);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--grey);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .contact-info p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #bbb;
+      margin-bottom: 2rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+      color: var(--grey-light);
+    }
+
+    .contact-item span:first-child {
+      font-size: 1.2rem;
+      width: 30px;
+    }
+
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-family: var(--font-condensed);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      background: var(--grey-mid);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--white);
+      padding: 0.8rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      border-radius: 3px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--sky);
+    }
+
+    .form-group select option { background: var(--grey-mid); }
+
+    .form-group textarea { resize: vertical; min-height: 120px; }
+
+    /* ── REGISTRATION MODAL ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal-overlay.active { display: flex; }
+
+    .modal {
+      background: var(--grey);
+      border: 1px solid rgba(77,191,239,0.2);
+      border-radius: 6px;
+      padding: 2.5rem;
+      max-width: 560px;
+      width: 100%;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      color: var(--grey-light);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: var(--white); }
+
+    .modal h2 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .modal p {
+      font-size: 0.9rem;
+      color: var(--grey-light);
+      margin-bottom: 1.5rem;
+    }
+
+    .modal .contact-form { gap: 0.85rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--black);
+      border-top: 1px solid rgba(77,191,239,0.1);
+      padding: 3rem 2.5rem;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-left {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .footer-brand {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--sky);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-tagline {
+      font-family: var(--font-condensed);
+      font-size: 0.8rem;
+      color: var(--grey-light);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .footer-right {
+      font-size: 0.8rem;
+      color: var(--grey-light);
+      text-align: right;
+      line-height: 1.7;
+    }
+
+    .footer-right a {
+      color: var(--sky);
+      text-decoration: none;
+    }
+
+    /* ── MOBILE NAV ── */
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(10,10,10,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .mobile-menu.active { display: flex; }
+
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      color: var(--white);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+
+    .mobile-menu a:hover { color: var(--sky); }
+
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      color: var(--white);
+      font-size: 2rem;
+      cursor: pointer;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      #hero { padding: 0 1.5rem 4rem; }
+      .hero-stats { gap: 2rem; flex-wrap: wrap; }
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { display: none; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-item:nth-child(1) { grid-column: span 2; }
+      .gallery-item:nth-child(5) { grid-column: span 1; }
+      .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .form-row { grid-template-columns: 1fr; }
+      section { padding: 4rem 1.5rem; }
+      .social-header { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: clamp(3rem, 15vw, 5rem); }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item:nth-child(1),
+      .gallery-item:nth-child(5) { grid-column: span 1; }
+      .programs-grid { grid-template-columns: 1fr 1fr; }
+      .about-pillars { grid-template-columns: 1fr; }
+    }
+
+    /* ── SUCCESS MESSAGE ── */
+    .success-msg {
+      display: none;
+      background: rgba(77,191,239,0.1);
+      border: 1px solid var(--sky);
+      color: var(--sky);
+      padding: 1rem;
+      border-radius: 3px;
+      font-family: var(--font-condensed);
+      font-size: 0.9rem;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .success-msg.show { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-badge">PTE</div>
+    <div class="nav-logo-text">
+      PTE Football Academy
+      <span>Performance Through Engagement</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#social">Follow Us</a></li>
+    <li><a href="#contact" class="nav-cta">Register</a></li>
+  </ul>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">&#x2715;</button>
+  <a href="#about" onclick="toggleMenu()">About</a>
+  <a href="#programs" onclick="toggleMenu()">Programs</a>
+  <a href="#gallery" onclick="toggleMenu()">Gallery</a>
+  <a href="#social" onclick="toggleMenu()">Follow Us</a>
+  <a href="#contact" onclick="toggleMenu()">Register</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+
+  <div class="hero-content">
+    <div class="hero-tag">Ibadan, Nigeria &nbsp;|&nbsp; Free Grassroots Academy</div>
+    <h1 class="hero-title">
+      <span class="outline">PTE</span><br>
+      <span class="accent">Football</span><br>
+      Academy
+    </h1>
+    <p class="hero-sub">
+      <strong>Performance Through Engagement.</strong><br>
+      Developing the next generation of Nigerian footballers — holistically.
+    </p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num">50+</span>
+        <span class="stat-label">Active Players</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">U6–U16</span>
+        <span class="stat-label">Age Groups</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">Free of Charge</span>
+      </div>
+    </div>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Register Your Child</a>
+      <a href="#about" class="btn-outline">Learn About PTE</a>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="about-text">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">More Than a Football Academy</h2>
+      <p>
+        PTE Football Academy was born from a simple truth: <strong>talent without structure gets lost.</strong> 
+        Founded in Ibadan, Oyo State, we exist to give young Nigerians aged 6 to 16 what many never get — 
+        real coaching, real discipline, and a real future.
+      </p>
+      <p>
+        We are completely <strong>free of charge.</strong> No registration fees. No hidden costs. 
+        Just committed coaches, structured training, and young boys who deserve better than vibes and hope.
+      </p>
+      <p>
+        At PTE, football is the vehicle. Holistic development is the destination. We believe the same 
+        discipline that makes a great player builds a great person — and we coach both.
+      </p>
+      <div class="about-pillars">
+        <div class="pillar">
+          <div class="pillar-icon">⚽</div>
+          <h4>Technical Training</h4>
+          <p>Structured, age-appropriate sessions every week.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">📚</div>
+          <h4>Education First</h4>
+          <p>Football and schooling go hand in hand here.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🏆</div>
+          <h4>Competition Ready</h4>
+          <p>We prepare boys for organised football at every level.</p>
+        </div>
+        <div class="pillar">
+          <div class="pillar-icon">🌍</div>
+          <h4>Global Ambition</h4>
+          <p>Creating pathways for talent to be seen internationally.</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual">
+      <img src="IMG_0395.jpeg" alt="PTE Coach training players" class="about-img-main" onerror="this.style.display='none'"/>
+      <img src="IMG_9118.jpeg" alt="PTE player in action" class="about-img-overlay" onerror="this.style.display='none'"/>
+      <div class="about-badge">
+        <span class="badge-num">2+</span>
+        <span class="badge-text">Years Building</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section id="programs">
+  <div class="programs-header">
+    <div class="section-label">Age Groups</div>
+    <h2 class="section-title">Our Programs</h2>
+  </div>
+  <div class="programs-grid">
+    <div class="program-card">
+      <div class="program-age">U6</div>
+      <div class="program-name">Grasshoppers</div>
+      <p class="program-desc">The youngest PTE family members. We focus on fun, movement, and first touches. Building love for the game from day one.</p>
+      <span class="tag">Ages 5–6</span>
+    </div>
+    <div class="program-card">
+      <div class="program-age">U8</div>
+      <div class="program-name">Cubs</div>
+      <p class="program-desc">Coordination, basic skills and small-sided games. Players begin to understand positions and team play.</p>
+      <span class="tag">Ages 7–8</span>
+    </div>
+    <div class="program-card">
+      <div class="program-age">U10</div>
+      <div class="program-name">Falcons</div>
+      <p class="program-desc">Technical skills deepen. Ball control, dribbling, passing and decision-making become the focus.</p>
+      <span class="tag">Ages 9–10</span>
+    </div>
+    <div class="program-card">
+      <div class="program-age">U12</div>
+      <div class="program-name">Eagles</div>
+      <p class="program-desc">Tactical awareness begins. Players learn positional discipline, set pieces, and competitive match preparation.</p>
+      <span class="tag">Ages 11–12</span>
+    </div>
+    <div class="program-card">
+      <div class="program-age">U14</div>
+      <div class="program-name">Lions</div>
+      <p class="program-desc">High intensity training. Physical conditioning, tactical formations, leadership and mental strength development.</p>
+      <span class="tag">Ages 13–14</span>
+    </div>
+    <div class="program-card">
+      <div class="program-age">U16</div>
+      <div class="program-name">Elite Squad</div>
+      <p class="program-desc">Pathway to professional football. Scouts, trials, and structured opportunities for the most dedicated players.</p>
+      <span class="tag">Ages 15–16</span>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="gallery-header">
+    <div class="section-label">In Action</div>
+    <h2 class="section-title">The Real PTE</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item">
+      <img src="IMG_2028.jpeg" alt="PTE training session" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_9122.jpeg" alt="PTE players celebrating" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_2652.jpeg" alt="PTE squad photo" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_2116.jpeg" alt="PTE drills" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_2175.jpeg" alt="PTE running drills" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_0223.jpeg" alt="Coach Francis training" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_3008.jpeg" alt="PTE players dribbling" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+    <div class="gallery-item">
+      <img src="IMG_2655.jpeg" alt="PTE kit" onerror="this.parentElement.style.background='#1a1a1a'"/>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section id="philosophy">
+  <div class="section-label">Our Belief</div>
+  <h2 class="section-title">Holistic Development</h2>
+  <p class="philosophy-quote">
+    "Football, education, and vocational skills can go hand in hand — if someone actually builds the structure. 
+    That is what PTE is."
+  </p>
+  <div class="philosophy-tagline">Performance Through Engagement</div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <div class="social-header">
+    <div>
+      <div class="section-label">Stay Connected</div>
+      <h2 class="section-title">Follow PTE</h2>
+    </div>
+    <p style="color: var(--grey-light); font-size: 0.9rem; max-width: 320px; line-height: 1.6;">
+      Training updates, match highlights, kit reveals and player journeys — all on our channels.
+    </p>
+  </div>
+  <div class="social-links">
+    <a href="https://www.instagram.com/ptefootballacademyng" target="_blank" rel="noopener" class="social-card">
+      <div class="social-icon ig">📸</div>
+      <div class="social-info">
+        <h4>Instagram</h4>
+        <p>@ptefootballacademyng</p>
+      </div>
+    </a>
+    <a href="https://www.tiktok.com/@ptefootballng" target="_blank" rel="noopener" class="social-card">
+      <div class="social-icon tt">🎵</div>
+      <div class="social-info">
+        <h4>TikTok</h4>
+        <p>@ptefootballng</p>
+      </div>
+    </a>
+    <a href="https://youtube.com/@trainwithsammy" target="_blank" rel="noopener" class="social-card">
+      <div class="social-icon yt">▶</div>
+      <div class="social-info">
+        <h4>YouTube</h4>
+        <p>@trainwithsammy</p>
+      </div>
+    </a>
+    <a href="https://x.com/ptefootballng" target="_blank" rel="noopener" class="social-card">
+      <div class="social-icon tw">𝕏</div>
+      <div class="social-info">
+        <h4>Twitter / X</h4>
+        <p>@ptefootballng</p>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <div class="section-label">Get Involved</div>
+      <h2 class="section-title">Register or Reach Out</h2>
+      <p>
+        Whether you want to register your child, partner with us, sponsor the academy, or just learn more about what we do — we want to hear from you.
+      </p>
+      <div class="contact-details">
+        <div class="contact-item">
+          <span>📍</span>
+          <span>Ibadan, Oyo State, Nigeria</span>
+        </div>
+        <div class="contact-item">
+          <span>📅</span>
+          <span>Training every Saturday</span>
+        </div>
+        <div class="contact-item">
+          <span>🎓</span>
+          <span>Ages U6 to U16 welcome</span>
+        </div>
+        <div class="contact-item">
+          <span>✅</span>
+          <span>Completely free to join</span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <form class="contact-form" id="contactForm" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Parent / Guardian Name</label>
+            <input type="text" name="parent_name" placeholder="Full name" required/>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" name="phone" placeholder="08xxxxxxxxx" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Child's Name</label>
+          <input type="text" name="child_name" placeholder="Full name" required/>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Child's Age</label>
+            <input type="number" name="age" placeholder="Age" min="5" max="16" required/>
+          </div>
+          <div class="form-group">
+            <label>Age Group</label>
+            <select name="age_group">
+              <option value="">Select group</option>
+              <option>U6 – Grasshoppers</option>
+              <option>U8 – Cubs</option>
+              <option>U10 – Falcons</option>
+              <option>U12 – Eagles</option>
+              <option>U14 – Lions</option>
+              <option>U16 – Elite Squad</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Reason for Joining / Message</label>
+          <textarea name="message" placeholder="Tell us about your child or ask us anything..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%; text-align:center; border:none;">
+          Send Registration
+        </button>
+        <div class="success-msg" id="successMsg">
+          Thank you! We will be in touch with you soon. Welcome to PTE.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-left">
+      <div class="footer-brand">PTE Football Academy</div>
+      <div class="footer-tagline">Performance Through Engagement — Ibadan, Nigeria</div>
+    </div>
+    <div class="footer-right">
+      &copy; 2025 PTE Football Academy Nigeria. All rights reserved.<br>
+      Built with purpose. Coaching with heart.<br>
+      <a href="https://www.instagram.com/ptefootballacademyng" target="_blank">Instagram</a> &nbsp;|&nbsp;
+      <a href="https://www.tiktok.com/@ptefootballng" target="_blank">TikTok</a> &nbsp;|&nbsp;
+      <a href="https://youtube.com/@trainwithsammy" target="_blank">YouTube</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('active');
+  }
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(10,10,10,0.98)';
+    } else {
+      nav.style.background = 'rgba(10,10,10,0.85)';
+    }
+  });
+
+  // Form submission
+  function handleSubmit(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('successMsg').classList.add('show');
+      e.target.reset();
+      btn.textContent = 'Send Registration';
+      btn.disabled = false;
+    }, 1200);
+  }
+
+  // Intersection Observer for fade-in on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.program-card, .pillar, .social-card, .gallery-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
