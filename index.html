@@ -294,27 +294,27 @@
             <div class="form-row">
               <div class="form-group">
                 <label for="parent-name">Parent / Guardian Name</label>
-                <input type="text" id="parent-name" placeholder="Full name" required/>
+                <input type="text" id="parent-name" name="parent_name" placeholder="Full name" required/>
               </div>
               <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" id="phone" placeholder="08xxxxxxxxx" required/>
+                <input type="tel" id="phone" name="phone" placeholder="08xxxxxxxxx" required/>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="child-name">Child's Name</label>
-                <input type="text" id="child-name" placeholder="Full name" required/>
+                <input type="text" id="child-name" name="child_name" placeholder="Full name" required/>
               </div>
               <div class="form-group">
                 <label for="child-age">Child's Age</label>
-                <input type="number" id="child-age" placeholder="Age" min="5" max="16" required/>
+                <input type="number" id="child-age" name="child_age" placeholder="Age" min="5" max="16" required/>
               </div>
             </div>
             <div class="form-row">
               <div class="form-group">
                 <label for="age-group">Age Group</label>
-                <select id="age-group">
+                <select id="age-group" name="age_group">
                   <option value="">Select group</option>
                   <option>U6 – Grasshoppers (Ages 5–6)</option>
                   <option>U8 – Cubs (Ages 7–8)</option>
@@ -326,7 +326,7 @@
               </div>
               <div class="form-group">
                 <label for="position">Position (Optional)</label>
-                <select id="position">
+                <select id="position" name="position">
                   <option value="">Select position</option>
                   <option>Goalkeeper</option>
                   <option>Defender</option>
@@ -338,7 +338,7 @@
             </div>
             <div class="form-group">
               <label for="message">Message (Optional)</label>
-              <textarea id="message" placeholder="Tell us about your child or ask any questions..."></textarea>
+              <textarea id="message" name="message" placeholder="Tell us about your child or ask any questions..."></textarea>
             </div>
             <button type="submit" class="submit-btn">Send Registration</button>
             <div class="success-msg" id="successMsg">
