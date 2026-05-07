@@ -69,46 +69,5 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 
-  /* ── REGISTRATION FORM ── */
-  var form       = document.getElementById('registrationForm');
-  var successMsg = document.getElementById('successMsg');
-
- if (form) {
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-
-      var submitBtn = form.querySelector('.submit-btn');
-      var formData  = new FormData(form);
-
-      submitBtn.textContent = 'Sending...';
-      submitBtn.disabled = true;
-
-      fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
-      })
-      .then(function (response) {
-        if (response.ok) {
-          form.reset();
-          if (successMsg) {
-            successMsg.classList.add('show');
-            setTimeout(function () {
-              successMsg.classList.remove('show');
-            }, 6000);
-          }
-        } else {
-          alert('Something went wrong. Please try again.');
-        }
-      })
-      .catch(function () {
-        alert('Network error. Please check your connection and try again.');
-      })
-      .finally(function () {
-        submitBtn.textContent = 'Send Registration';
-        submitBtn.disabled = false;
-      });
-    });
-  }
 
 });
